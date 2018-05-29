@@ -1,12 +1,12 @@
 # Git Introduction
 
-<div style="text-align: justify"> Git is a VCS (Version Control System). They are used to ease
+Git is a VCS (Version Control System). They are used to ease
 the management of the different versions of a product.
 The main difference between Git and other VCS is the way it
 handles the data. While the others are based on
 a list of changes made per file, Git treats them as snapshots.
 It stores references to snapshots. If the file has not changed,
-Git does not store it again, just a link to de previous version.</div>
+Git does not store it again, just a link to de previous version.
 
 You can find a more complete information
  at https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
