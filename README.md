@@ -94,6 +94,32 @@ Delete Local and Remote Branch
 
 ### Working with remote repositories
 
+In this part you will need to set up a remote repository.
+
+After that you will need to configure your local repository to push your commits
+into the remote repository. To do this you need to set the URL in your repo:
+
+```
+git remote add origin <remote-url>
+```
+Then, you are able to push your commits and share your code.
+```
+git push -u origin master
+```
+This is for the first time you push a branch. Then only `git push` would be
+enough.
+
+Let's practice a bit.
+
+##### Exercise:
+
+1. Make groups and set a remote repository for the whole group.
+2. Create a file and fill it with something.
+3. Commit and push the file.
+4. Create each one a branch.
+5. Modify the same line of the file and push.
+6. Merge your branch and resolve the conflicts.
+
 ### Tags
 A tag is the snapshot of the state of your repository in a moment.Creating tags is a way to tag the different states of a repository.Git has the ability to tag specific points in history as being important. Typically people use this functionality to mark release points or versions of a project(v1.0, and so on).
 
@@ -157,7 +183,7 @@ git tag --list
 git tag -l "pattern*"
 ```
 
-Example: 
+##### Example: 
 
 Create different tags with the same pattern (v.1.8.5)):
 
