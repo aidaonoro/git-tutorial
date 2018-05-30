@@ -8,8 +8,7 @@ a list of changes made per file, Git treats them as snapshots.
 It stores references to snapshots. If the file has not changed,
 Git does not store it again, just a link to de previous version.
 
-You can find a more complete information
- at https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+You can find a more complete information [here](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics).
  
 ## Install Git
 
@@ -87,10 +86,32 @@ If we type `git status` again it will tell us that everything is ok. Using this 
 frequently will save us from many potential issues we may encounter.
 
 ### Working with branches
-Create a branch
-Switch between branches
-Merge branch and resolve conflicts
-Delete Local and Remote Branch 
+
+Branches are like check points of your code. They are use to have different versions
+of your code and to ease the team work and other processes. The branch by default
+is `master`, but you may have others like `develop` or to represent features
+in development like `feature/calculator`.
+
+To create a branch use:
+
+```
+git branch <branch>
+```
+If you want to change your point at another branch then:
+```
+git checkout <branch>
+```
+And to create and change:
+```
+git checkout -b <branch>
+```
+Once you have finished to develop your code and you want to join your changes to
+your `develop` branch or you want to 'merge' changes to your production code the you
+will use:
+```
+git merge <branch-with-code-to-add-to-the-current-branch>
+```
+There may be conflicts when you do this. Just resolve them and commit again.
 
 ### Working with remote repositories
 
@@ -108,6 +129,11 @@ git push -u origin master
 ```
 This is for the first time you push a branch. Then only `git push` would be
 enough.
+
+To remove a branch in the remote repository use:
+```
+git push -d <origin> <branch>
+```
 
 Let's practice a bit.
 
