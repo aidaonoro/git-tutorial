@@ -286,3 +286,36 @@ git revert -n master~5..master~2
 3. Check status `git status`: we see we can commit both files
 4. `git reset HEAD <file>` to unstaged file reset1.txt
 5. `git status` (it only appears the changes made to reset2.txt because we have deleted the change in reset1.txt)
+
+## Other tips
+
+If you are working through the command line then this tool might be useful for you.
+```
+sudo apt install tig
+```
+Then go to your git repository and type `tig`. This will show you the history of the repository
+as well as the differences made in each commit and who made them.
+
+If you prefer to work with a GUI client instead of `tig`, I recommend `gitg`.
+```
+sudo apt install gitg
+```
+
+Moreover, you can create your own git aliases by adding them to the `~/.gitconfig` file.
+For example, these are very useful ones:
+
+```
+[alias]
+        a = add
+        last = log -1 --stat
+        cp = cherry-pick
+        co = checkout
+        cl = clone
+        ci = commit
+        st = status -sb
+        br = branch
+        unstage = reset HEAD --
+        dc = diff --cached
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+        find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+```
