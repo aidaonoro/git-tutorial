@@ -125,7 +125,10 @@ more changes they would have been shown).
 ### Working with remote repositories
 
 ### Working with branches
-
+Create a branch
+Switch between branches
+Merge branch and resolve conflicts
+Delete Local and Remote Branch
 ### Tags
 A tag is the snapshot of the state of your repository in a moment.Creating tags is a way to tag the different states of a repository.Git has the ability to tag specific points in history as being important. Typically people use this functionality to mark release points or versions of a project(v1.0, and so on).
 
@@ -215,3 +218,61 @@ v1.8.5.5
 
 ```
 ### Undo commits
+One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess up your commit message
+
+```
+git commit --amend -m updated commit message"
+git commit --amend --no-edit
+```
+
+Example:
+Create two files and commit to your repo.
+Create another file and modify one of the files that you create before
+Then commit with amend to do not create another commit.
+
+Git Checkout command
+It is used to discard changes in a working directory
+```
+git checkout --<file>
+```
+
+DIFFERENCE BETWEEN RESET AND REVERT
+
+Reset rewinds history (files + commits) back to the previous commits
+Revert rewinds your files back to the previous commits by adding a new commit to show this
+You should use revert (especially if you have pushed) as it does not rewrite history
+
+GIT RESET
+```
+# If you are pulling, rebasing or your new code is a mess, and you want to return to the last committed point:
+# Note that this does not delete newly created files
+# git clean -f -d will remove newly created files and directories (BEWARE!)
+git reset --hard
+
+# reset to the last commit
+# HEAD is the current commit, HEAD^ is the last commit
+# HEAD~2 is the 3rd, HEAD~3 is the 4th and so on...
+git reset --hard HEAD^
+
+# reset to a particular commit
+git reset --hard be47384a
+```
+GIT REVERT
+```
+# Revert the commit 0766c053
+# Note that commit may not necessary be the last commit, it can be ANY commit
+git revert 0766c053
+
+# Revert the changes specified by the fourth last commit in HEAD and create a new commit with the reverted changes.
+git revert HEAD~3
+
+# Revert the changes done by commits from the fifth last commit in master (included) to the third last commit in master (included), but do not create any commit with the reverted changes. The revert only modifies the working tree and the index.
+git revert -n master~5..master~2
+```
+
+Example for Git Reset:
+1.Create two files(reset1.txt, reset2.txt)
+2.Add both of them (git add *)
+3.Check status (git status): we see we can commit both files
+4.git reset HEAD <file> to unstaged file reset1.txt
+5.git status(only appear the change for reset2.txt because we have deleted the change in reset1.txt))
