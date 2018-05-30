@@ -127,5 +127,91 @@ more changes they would have been shown).
 ### Working with branches
 
 ### Tags
+A tag is the snapshot of the state of your repository in a moment.Creating tags is a way to tag the different states of a repository.Git has the ability to tag specific points in history as being important. Typically people use this functionality to mark release points or versions of a project(v1.0, and so on).
 
+
+Create a tag
+Git supports two types of tags: lightweight and annotated.
+
+
+```
+Annotated tags
+git tag -a <tagname> -m "comment"
+
+git tag -a v1.0.0 -m "myversion 1.0.0"
+
+```
+```
+Lightweight Tags
+You create a tag without -a or -m option
+
+git tag <tagname>
+```
+Check the commit associated with your tag and information about the commit and the tag
+
+```
+git show <tagname>
+
+Difference between annotated and lightweight tag: in lightweight tag you do not see information about who makes the tag.
+
+```
+Tagging a commit from your commit history
+
+Imagine you make a commit with version 3.1.2 of your code and you forget to tag that version and continue working and making commits
+However then you can tag that commit
+
+```
+git log --pretty=oneline
+git tag -a <tagname> <checksum of commit>
+
+```
+
+Shared tags to your remote repository
+
+```
+One tag
+git push origin <tagname>
+
+All tags
+git push origin --tags
+```
+
+
+List all tags of a repository alphabetically
+
+```
+git tag
+git tag -l
+git tag --list
+
+```
+
+Search for tags with a particular pattern
+
+```
+git tag -l "pattern*"
+```
+
+Example: We create different tags with the same pattern(v.1.8.5))
+
+```
+$ git tag -a v1.8.5 -m "my version 1.8.5"
+```
+
+We look for the tags with teh pattern(v1.8.5)
+
+```
+$ git tag -l "v1.8.5*"
+v1.8.5
+v1.8.5-rc0
+v1.8.5-rc1
+v1.8.5-rc2
+v1.8.5-rc3
+v1.8.5.1
+v1.8.5.2
+v1.8.5.3
+v1.8.5.4
+v1.8.5.5
+
+```
 ### Undo commits
