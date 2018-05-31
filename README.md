@@ -86,7 +86,210 @@ to solve it with the command `git commit --amend`.
 If we type `git status` again it will tell us that everything is ok. Using this command
 frequently will save us from many potential issues we may encounter.
 
-### Removing staged changes
+### Working with branches
++ __See branches in your project__
+
+```
+git branch
+
+(-v): to see the latest changes in each branch
+```
+
++ __Creating a branch__
+
+```
+git branch <branchname>
+```
++ __Switch between existing branches__
+
+```
+git checkout <branchname>
+git checkout -b <branchname>  creas una rama y te mueves a la nueva rama creada
+```
++ __Switch between existing branches__
+
+It is an operation to mix two branches
+```
+1. Go to branch where you want to mix (master)
+git checkout <branchwheremerge>
+
+2. Merge branch
+git merge <branchtomerge>
+
+```
+
++ __Resolving conflicts__
+-When you work on a team an each member modify the same line of a file, when you try to commit your changes, it will cause a conflict.
+-If you changed the same part of the same file differently in the two branches you’re merging together, Git won’t be able to merge them cleanly. You will get a merge conflict similar to this:
+
+```
+git merge iss53
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+``` 
+Then you execute "git status" to see which are the files that git could not commit because are in conflict.
+Open that files and resolve the conflict
+
+```
+<<<<<<< HEAD:index.html
+<div id="footer">contact : email.support@github.com</div>
+=======
+<div id="footer">
+ please contact us at support@github.com
+</div>
+>>>>>>> iss53:index.html
+
+First part it is the code in branch where you are going to merge(master) and second part it is the code in the branch to merge
+```
+
++ __Delete Local and Remote Branch__
+
+_Local Branch_
+```
+git branch -d <branchname>
+
+git branch -D <branchname>
+```
+
+_Remote Branch_
+``` 
+git push origin --delete <remotebranchname>
+```
+
+### Working with remote repositories
+_Push to a remote_
+When you want to share a branch with the world, you need to push it up to a remote that you have write access to. 
+
+One Branch
+```
+git push origin <branchname>
+```
+All Branches
+
+```
+git push --all
+```
+
+
+_Pull from a remote_
+Update your local repository to the last commit
+
+```
+git pull
+```
+
+_Pull Request_
+Pull requests let you tell others about changes you've pushed to a repository on GitHub. 
+Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before the changes are merged into the repository.
+
+
+### Tags
+A tag is the snapshot of the state of your repository in a moment.Creating tags is a way to tag the different states of a repository.Git has the ability to tag specific points in history as being important. Typically people use this functionality to mark release points or versions of a project(v1.0, and so on).
+
++ __Creating a tag__
+
+Git supports two types of tags: lightweight and annotated.
+
+_Annotated tags:_
+```
+git tag -a <tagname> -m "comment"
+
+git tag -a v1.0.0 -m "myversion 1.0.0"
+
+```
+_Lightweight Tags:_
+```
+git tag <tagname>
+```
+Check the commit associated with your tag and information about the commit and the tag
+
+```
+git show <tagname>
+
+```
+Differences between annotated and lightweight tag: in lightweight tag you do not see information about who makes the tag.
+
++ __Tagging a commit from your commit history__
+
+Imagine you make a commit with version 3.1.2 of your code and you forget to tag that version and continue working and making commits
+However then you can tag that commit
+
+```
+git log --pretty=oneline
+git tag -a <tagname> <checksum of commit>
+
+```
+
++ __Pushing tags to your remote repository__
+
+_One tag:_
+```
+git push origin <tagname>
+```
+_All tags:_
+```
+git push origin --tags
+```
+
++ __List all tags of a repository alphabetically__
+
+```
+git tag
+git tag -l
+git tag --list
+
+```
+
++ __Search for tags with a particular pattern__
+
+```
+git tag -l "pattern*"
+```
+
+Example: 
+
+Create different tags with the same pattern (v.1.8.5)):
+
+```
+$ git tag -a v1.8.5 -m "my version 1.8.5"
+```
+
+Then look for the tags with the pattern (v1.8.5)
+
+```
+$ git tag -l "v1.8.5*"
+v1.8.5
+v1.8.5-rc0
+v1.8.5-rc1
+v1.8.5-rc2
+v1.8.5-rc3
+v1.8.5.1
+v1.8.5.2
+v1.8.5.3
+v1.8.5.4
+v1.8.5.5
+
+```
+### Undo commits
+One of the common undoing changes takes place when you commit too early and possibly forget to add some files, or you mess up your commit message
+
+```
+git commit --amend -m updated commit message"
+git commit --amend --no-edit
+```
+
+##### Exercise:
+1. Create two files and commit to your repo.
+2. Create another file and modify one of the files that you create before
+3. Then commit with amend to do not create another commit.
+
+Git Checkout command is used to discard changes in a working directory:
+```
+git checkout --<file>
+```
+
+##### Full example:
 
 We have made some changes to a file already staged but not committed and we want to remove it
 from the stage area but not lose the changes. Then add a new file
@@ -120,159 +323,89 @@ cat test2.txt
 git status
 ```
 The changes have disappeared and the status shows no changes left (if it had been
-more changes they would have been shown). 
+more changes they would have been shown).
 
-### Working with remote repositories
-
-### Working with branches
-Create a branch
-Switch between branches
-Merge branch and resolve conflicts
-Delete Local and Remote Branch
-### Tags
-A tag is the snapshot of the state of your repository in a moment.Creating tags is a way to tag the different states of a repository.Git has the ability to tag specific points in history as being important. Typically people use this functionality to mark release points or versions of a project(v1.0, and so on).
-
-
-Create a tag
-Git supports two types of tags: lightweight and annotated.
-
-
-```
-Annotated tags
-git tag -a <tagname> -m "comment"
-
-git tag -a v1.0.0 -m "myversion 1.0.0"
-
-```
-```
-Lightweight Tags
-You create a tag without -a or -m option
-
-git tag <tagname>
-```
-Check the commit associated with your tag and information about the commit and the tag
-
-```
-git show <tagname>
-
-Difference between annotated and lightweight tag: in lightweight tag you do not see information about who makes the tag.
-
-```
-Tagging a commit from your commit history
-
-Imagine you make a commit with version 3.1.2 of your code and you forget to tag that version and continue working and making commits
-However then you can tag that commit
-
-```
-git log --pretty=oneline
-git tag -a <tagname> <checksum of commit>
-
-```
-
-Shared tags to your remote repository
-
-```
-One tag
-git push origin <tagname>
-
-All tags
-git push origin --tags
-```
-
-
-List all tags of a repository alphabetically
-
-```
-git tag
-git tag -l
-git tag --list
-
-```
-
-Search for tags with a particular pattern
-
-```
-git tag -l "pattern*"
-```
-
-Example: We create different tags with the same pattern(v.1.8.5))
-
-```
-$ git tag -a v1.8.5 -m "my version 1.8.5"
-```
-
-We look for the tags with teh pattern(v1.8.5)
-
-```
-$ git tag -l "v1.8.5*"
-v1.8.5
-v1.8.5-rc0
-v1.8.5-rc1
-v1.8.5-rc2
-v1.8.5-rc3
-v1.8.5.1
-v1.8.5.2
-v1.8.5.3
-v1.8.5.4
-v1.8.5.5
-
-```
-### Undo commits
-One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess up your commit message
-
-```
-git commit --amend -m updated commit message"
-git commit --amend --no-edit
-```
-
-Example:
-Create two files and commit to your repo.
-Create another file and modify one of the files that you create before
-Then commit with amend to do not create another commit.
-
-Git Checkout command
-It is used to discard changes in a working directory
-```
-git checkout --<file>
-```
-
-DIFFERENCE BETWEEN RESET AND REVERT
+#### Differences between Reset and Revert
 
 Reset rewinds history (files + commits) back to the previous commits
-Revert rewinds your files back to the previous commits by adding a new commit to show this
-You should use revert (especially if you have pushed) as it does not rewrite history
+by adding a new commit to show this.
+You should use revert (especially if you have pushed) as it does not rewrite history.
 
-GIT RESET
+##### Examples:
+
++ __Git reset__
+
+If you are pulling, rebasing or your new code is a mess, and you want to return to the last committed point.
+
+Note that this does not delete new files, 
+`git clean -f -d` will remove new files and directories (watch out!).
 ```
-# If you are pulling, rebasing or your new code is a mess, and you want to return to the last committed point:
-# Note that this does not delete newly created files
-# git clean -f -d will remove newly created files and directories (BEWARE!)
 git reset --hard
+```
+Let's reset the last commit. HEAD is the current commit, HEAD^ is the last commit, HEAD~2 is the 3rd, HEAD~3 is the 4th and so on...
 
-# reset to the last commit
-# HEAD is the current commit, HEAD^ is the last commit
-# HEAD~2 is the 3rd, HEAD~3 is the 4th and so on...
+```
 git reset --hard HEAD^
 
-# reset to a particular commit
+```
+Reset to a particular commit:
+```
 git reset --hard be47384a
 ```
-GIT REVERT
++ __Git revert__
+
+Let's revert the commit 0766c053.
+Note that commit may not necessary be the last commit, it can be ANY commit.
 ```
-# Revert the commit 0766c053
-# Note that commit may not necessary be the last commit, it can be ANY commit
 git revert 0766c053
-
-# Revert the changes specified by the fourth last commit in HEAD and create a new commit with the reverted changes.
+```
+Revert the changes specified by the fourth last commit in HEAD and create a new commit with the reverted changes.
+```
 git revert HEAD~3
-
-# Revert the changes done by commits from the fifth last commit in master (included) to the third last commit in master (included), but do not create any commit with the reverted changes. The revert only modifies the working tree and the index.
+```
+Revert the changes done by commits from the fifth last commit in master 
+(included) to the third last commit in master (included), but do not create any commit with 
+the reverted changes. The revert only modifies the working tree and the index.
+```
 git revert -n master~5..master~2
 ```
 
-Example for Git Reset:
-1.Create two files(reset1.txt, reset2.txt)
-2.Add both of them (git add *)
-3.Check status (git status): we see we can commit both files
-4.git reset HEAD <file> to unstaged file reset1.txt
-5.git status(only appear the change for reset2.txt because we have deleted the change in reset1.txt))
+##### Exercise: Git Reset
+1. Create two files(reset1.txt, reset2.txt)
+2. Add both of them `git add *`
+3. Check status `git status`: we see we can commit both files
+4. `git reset HEAD <file>` to unstaged file reset1.txt
+5. `git status` (it only appears the changes made to reset2.txt because we have deleted the change in reset1.txt)
+
+## Other tips
+
+If you are working through the command line then this tool might be useful for you.
+```
+sudo apt install tig
+```
+Then go to your git repository and type `tig`. This will show you the history of the repository
+as well as the differences made in each commit and who made them.
+
+If you prefer to work with a GUI client instead of `tig`, I recommend `gitg`.
+```
+sudo apt install gitg
+```
+
+Moreover, you can create your own git aliases by adding them to the `~/.gitconfig` file.
+For example, these are very useful ones:
+
+```
+[alias]
+        a = add
+        last = log -1 --stat
+        cp = cherry-pick
+        co = checkout
+        cl = clone
+        ci = commit
+        st = status -sb
+        br = branch
+        unstage = reset HEAD --
+        dc = diff --cached
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+        find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+```
