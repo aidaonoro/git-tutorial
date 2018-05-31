@@ -411,3 +411,42 @@ For example, these are very useful ones:
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
         find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
 ```
+
+##### Common exercises
+
++ __Ejemplo 1__
+
+Arreglar bug en produccion
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+Imaginamos que estamos en un proyecto y empiezas a desarrollar una nueva funcionalidad, derepente se produce un bug en produccion y hay que arreglarlo cambiandote a la rama master, creando el posterior hotfix y mergeando una vez solucionado a la rama master de nuevo
+Escribir con ellos los pasos a hacer en una pizarra, y luego que los hagan.
+
+
++ __Ejemplo 2__
+
+Simular ejercicio en el que ellos trabajan en un equipo de desarrollo.
+Podria se individuales o por parejas, en funcion del tiempo
+
+Explicarles el modelo de ramas(master, develop, feature).
+
+Desde master que se creen una rama develop.
+Que creen algun fichero en develop
+
+En parejas
+Meter credenciales ssh en el repo de uno de los dos y configurar su gitconfig
+Que creen cada uno una rama desde develop con el nombre feature/sunombre
+Hacen los cambios oportunos escribiendo algo los dos en la misma linea: ej: este es el ejemplo de: su nombre
+
+Mergea uno de los dos su rama contra develop.
+Luego va a mergear el otro y le dara conflicto que vean como se resuelve
+
+Finalmente una vez resuelto y mergeado todo a develop, se mergea develop a master para la puesta en produccion.
+
+Individualmente
+Cada uno a partir de develop se crea dos ramas
+En cada rama añaden al fichero una linea como por ejemplo: esta es mi rama: nombre de la rama
+Mergear una de las dos con develop
+Al mergear la segunda rama les dara conflicto. Resolver conflicto. 
+Mergear nuevamente a develop
+Mergear develop con master
+
