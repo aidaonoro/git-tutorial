@@ -487,6 +487,3 @@ Mergear una de las dos con develop
 Al mergear la segunda rama les dara conflicto. Resolver conflicto. 
 Mergear nuevamente a develop
 Mergear develop con master
-
-=======
-```
