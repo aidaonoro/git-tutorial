@@ -8,8 +8,7 @@ a list of changes made per file, Git treats them as snapshots.
 It stores references to snapshots. If the file has not changed,
 Git does not store it again, just a link to de previous version.
 
-You can find a more complete information
- at https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+You can find a more complete information [here](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics).
  
 ## Install Git
 
@@ -87,26 +86,68 @@ If we type `git status` again it will tell us that everything is ok. Using this 
 frequently will save us from many potential issues we may encounter.
 
 ### Working with branches
-+ __See branches in your project__
+
+Branches are like check points of your code. They are use to have different versions
+of your code and to ease the team work and other processes. The branch by default
+is `master`, but you may have others like `develop` or to represent features
+in development like `feature/calculator`.
+
+To create a branch use:
 
 ```
-git branch
+git branch <branch>
+```
+If you want to change your point at another branch then:
+```
+git checkout <branch>
+```
+And to create and change:
+```
+git checkout -b <branch>
+```
+Once you have finished to develop your code and you want to join your changes to
+your `develop` branch or you want to 'merge' changes to your production code the you
+will use:
+```
+git merge <branch-with-code-to-add-to-the-current-branch>
+```
+There may be conflicts when you do this. Just resolve them and commit again.
 
-(-v): to see the latest changes in each branch
-```
+### Working with remote repositories
 
-+ __Creating a branch__
+In this part you will need to set up a remote repository.
 
-```
-git branch <branchname>
-```
-+ __Switch between existing branches__
+After that you will need to configure your local repository to push your commits
+into the remote repository. To do this you need to set the URL in your repo:
 
 ```
-git checkout <branchname>
-git checkout -b <branchname>  creas una rama y te mueves a la nueva rama creada
+git remote add origin <remote-url>
 ```
-+ __Switch between existing branches__
+Then, you are able to push your commits and share your code.
+```
+git push -u origin master
+```
+This is for the first time you push a branch. Then only `git push` would be
+enough.
+
+To remove a branch in the remote repository use:
+
+git push -d <origin> <branch>
+```
+
+Let's practice a bit.
+
+##### Exercise:
+
+1. Make groups and set a remote repository for the whole group.
+2. Create a file and fill it with something.
+3. Commit and push the file.
+4. Create each one a branch.
+5. Modify the same line of the file and push.
+6. Merge your branch and resolve the conflicts.
+```
+
++ __Merge branches__
 
 It is an operation to mix two branches
 ```
@@ -171,7 +212,6 @@ All Branches
 git push --all
 ```
 
-
 _Pull from a remote_
 
 Update your local repository to the last commit
@@ -184,7 +224,6 @@ _Pull Request_
 
 Pull requests let you tell others about changes you've pushed to a repository on GitHub. 
 Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before the changes are merged into the repository.
-
 
 ### Tags
 A tag is the snapshot of the state of your repository in a moment.Creating tags is a way to tag the different states of a repository.Git has the ability to tag specific points in history as being important. Typically people use this functionality to mark release points or versions of a project(v1.0, and so on).
@@ -249,7 +288,7 @@ git tag --list
 git tag -l "pattern*"
 ```
 
-Example: 
+##### Example: 
 
 Create different tags with the same pattern (v.1.8.5)):
 
@@ -334,7 +373,6 @@ by adding a new commit to show this.
 You should use revert (especially if you have pushed) as it does not rewrite history.
 
 ##### Examples:
-
 + __Git reset__
 
 If you are pulling, rebasing or your new code is a mess, and you want to return to the last committed point.
@@ -450,3 +488,5 @@ Al mergear la segunda rama les dara conflicto. Resolver conflicto.
 Mergear nuevamente a develop
 Mergear develop con master
 
+=======
+```
